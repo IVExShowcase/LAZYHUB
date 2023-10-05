@@ -1,0 +1,44 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({
+    Name = "https://discord.gg/jYm7ZHT8",
+    HidePremium = false,
+    SaveConfig = true,
+    ConfigFolder = "OrionTest"
+})
+
+local Tab = Window:MakeTab({
+    Name = "VERY LAZY HUB",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local playerNameTextbox = Tab:AddTextbox({
+    Name = "Key",
+    Default = "",
+    Callback = function(Value)
+        enteredKey = Value -- Store the entered key
+    end
+})
+
+Tab:AddButton({
+    Name = "Check Key",
+    Callback = function()
+        local correctKey = "VERYLAZYHUB_VERSION2" -- The correct key you want to check against
+
+        if enteredKey == correctKey then
+            print("Key is correct. Running the script...")
+
+            -- Load and execute the script from the URL
+            local scriptURL = "https://raw.githubusercontent.com/IVExShowcase/Elevatorhub-CframeFinder/main/Elevator%20Hub"
+            local success, scriptFunction = pcall(loadstring, game:HttpGet(scriptURL))
+
+            if success then
+                scriptFunction() -- Run the loaded script
+            else
+                print("Failed to load and run the script.")
+            end
+        else
+            print("Key is incorrect. Please enter a valid key.")
+        end
+    end
+})
